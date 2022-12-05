@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>我爱你</title>
+    <style>
+        body{
+            background-image: url(./img.jpg);
+        }
+        h1{
+            position: fixed;
+            top: 40%;
+            left: 0;
+            width: 40%;
+            text-align: center;
+            transform:translateY(-50%);
+            font-family: 'Love Ya Like A Sister', cursive;
+            font-size: 70px;
+            color: #8a98a6;
+            padding: 0 20px;
+            }
+
+        h2{
+            position: fixed;
+            top: 45%;
+            left:70%;
+            width: 55%;
+            transform:translateY(-50%);
+            font-family: 'Love Ya Like A Sister', cursive;
+            font-size: 40px;
+            color: #8a98a6;
+            padding: 0 20px;
+            }
+    </style>
+</head>
+<body>
+  <h1 id="Time"></h1>
+  <h2><span id="demo"></span></h2>
+  <script>
+    function timingTime(){
+      let start = '2022-11-27 23:26:00'     //开始时间
+      let startTime = new Date(start).getTime()
+      let currentTime = new Date().getTime()
+      let difference = currentTime - startTime
+      let m =  Math.floor(difference / (1000))
+      let mm = m % 60  // 秒
+      let f = Math.floor(m / 60)
+      let ff = f % 60 // 分钟
+      let s = Math.floor(f/ 60) // 小时
+      let ss = s % 24
+      let day = Math.floor(s  / 24 ) // 天数
+      return day + "天" + ss + "时" + ff + "分" + mm +'秒'
+    }
+    setInterval(()=>{
+      document.getElementById('Time').innerHTML = timingTime()
+    },1000)
+
+
+    var text="桃之夭夭，灼灼其华。\n之子于归，宜其室家。\n桃之夭夭，有蕡其实。\n之子于归，宜其家室。\n桃之夭夭，其叶蓁蓁。\n之子于归，宜其家人。"//预设文字
+    var delay=300                     //文字出现的时间间隔
+    var i=0                           //初始化变量i
+    function scrollit(){               //设置id为demo的对象内的文字为变量text的0开始到i间的文字加“_”
+    demo.innerText=text.slice(0,i++)+"_"         
+    if(i>text.length){            //设置i大于text的文本长度时
+        i=200                      //重设i为0，使文字重新从第一个文字出现
+        setTimeout("scrollit()",delay*10)       //延时执行scrollit()函数,delay*10是为了让显示完整文字的时间长一点  
+    }
+    //否则在delay毫秒后再次执行scrollit()函数
+    else setTimeout("scrollit()",delay)             
+    }
+    scrollit()      //调用scrollit()函数
+
+  </script>
+</body>
+</html>
