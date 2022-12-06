@@ -18,33 +18,42 @@
 				margin: 0 auto;
 				width: 100%;
 				text-align: center;
-				transform:translateY(-50%);
+				transform: translateY(-50%);
 				font-family: 'Love Ya Like A Sister', cursive;
 				font-size: 60px;
 				color: #8a98a6;
 				padding: 0 20px;
-				}
+			}
 
-			h3 {
-            position: fixed;
-            top: 60%;
-            right: 0;
-            left: 0;
-            margin: 0 auto;
-            width: 100%;
-            text-align: center;
-            transform:translateY(-50%);
-            font-family: 'Love Ya Like A Sister', cursive;
-            font-size: 40px;
-            color: #8a98a6;
-            padding: 0 20px;
+			.mytest {
+				display: none;
+			}
+
+			.fon-h3 {
+				position: fixed;
+				top: 60%;
+				right: 0;
+				left: 0;
+				margin: 0 auto;
+				width: 100%;
+				text-align: center;
+				transform: translateY(-50%);
+				font-family: 'Love Ya Like A Sister', cursive;
+				font-size: 40px;
+				color: #8a98a6;
+				padding: 0 20px;
 			}
 		</style>
 
 	</head>
 	<body>
 		<h1 id="h1"></h1>
-		<h3><span id="demo"></span></h3>
+		<div id="source" class="mytest">
+			<p>桃之夭夭，灼灼其华。<br>之子于归，宜其室家。<br>桃之夭夭，有蕡其实。<br>之子于归，宜其家室。<br>桃之夭夭，其叶蓁蓁。<br>之子于归，宜其家人。</p>
+		</div>
+		<div id="output" class="fon-h3">
+
+		</div>
 		<canvas></canvas>
 
 		<script>
@@ -67,19 +76,88 @@
 				return true;
 			}
 
-			var text = "桃之夭夭，灼灼其华。\n之子于归，宜其室家。\n桃之夭夭，有蕡其实。\n之子于归，宜其家室。\n桃之夭夭，其叶蓁蓁。\n之子于归，宜其家人。\n" //预设文字
-			var delay = 300 //文字出现的时间间隔
-			var i = 0 //初始化变量i
-			function scrollit() { //设置id为demo的对象内的文字为变量text的0开始到i间的文字加“_”
-				demo.innerText = text.slice(0, i++) + "_"
-				if (i > text.length) { //设置i大于text的文本长度时
-					i = 200 //重设i为0，使文字重新从第一个文字出现
-					setTimeout("scrollit()", delay * 10) //延时执行scrollit()函数,delay*10是为了让显示完整文字的时间长一点  
+			class Typing {
+				constructor(opts) {
+					this.opts = opts || {};
+					this.source = opts.source;
+					this.output = opts.output;
+					this.delay = opts.delay || 120;
+					this.chain = {
+						parent: null,
+						dom: this.output,
+						val: []
+					};
+					if (!(typeof this.opts.done === 'function')) this.opts.done = function() {};
 				}
-				//否则在delay毫秒后再次执行scrollit()函数
-				else setTimeout("scrollit()", delay)
+
+				init() {
+					//初始化函数
+					this.chain.val = this.convert(this.source, this.chain.val);
+				}
+
+				convert(dom, arr) {
+					//将dom节点的子节点转换成数组，
+					let children = Array.from(dom.childNodes)
+					for (let i = 0; i < children.length; i++) {
+						let node = children[i]
+						if (node.nodeType === 3) {
+							arr = arr.concat(node.nodeValue.split('')) //将字符串转换成字符串数组，后面打印时才会一个一个的打印
+						} else if (node.nodeType === 1) {
+							let val = []
+							val = this.convert(node, val)
+							arr.push({
+								'dom': node,
+								'val': val
+							})
+						}
+					}
+					return arr
+				}
+
+				print(dom, val, callback) {
+					setTimeout(function() {
+						dom.appendChild(document.createTextNode(val));
+						callback();
+					}, this.delay);
+				}
+
+				play(ele) {
+					//当打印最后一个字符时，动画完毕，执行done
+					if (!ele.val.length) {
+						if (ele.parent) this.play(ele.parent);
+						else this.opts.done();
+						return;
+					}
+					let current = ele.val.shift() //获取第一个元素，同时删除数组中的第一个元素
+					if (typeof current === 'string') {
+						this.print(ele.dom, current, () => {
+							this.play(ele); //继续打印下一个字符
+						})
+					} else {
+						let dom = current.dom.cloneNode() //克隆节点，不克隆节点的子节点，所以不用加参数true
+						ele.dom.appendChild(dom)
+						this.play({
+							parent: ele,
+							dom,
+							val: current.val
+						})
+					}
+				}
+
+				start() {
+					this.init();
+					this.play(this.chain);
+				}
 			}
-			scrollit() //调用scrollit()函数
+		</script>
+		<script type="text/javascript">
+			let source = document.getElementById('source')
+			let output = document.getElementById('output')
+			let typing = new Typing({
+				source,
+				output
+			})
+			typing.start()
 		</script>
 
 	</body>
