@@ -1,77 +1,86 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>我爱你</title>
-    <style>
-        body{
-            background-color: #deebfe;
-        }
-        h1{
-            position: fixed;
-            top: 45%;
-            left: 0;
-            width: 50%;
-            text-align: center;
-            transform:translateY(-50%);
-            font-family: 'Love Ya Like A Sister', cursive;
-            font-size: 60px;
-            color: #8a98a6;
-            padding: 0 20px;
-            }
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>我爱你</title>
+		<style>
+			body {
+				overflow: hidden;
+				margin: 0;
+				background-color: #deebfe;
+			}
 
-        h3{
+			h1 {
+				position: fixed;
+				top: 30%;
+				right: 0;
+				left: 0;
+				margin: 0 auto;
+				width: 100%;
+				text-align: center;
+				transform:translateY(-50%);
+				font-family: 'Love Ya Like A Sister', cursive;
+				font-size: 60px;
+				color: #8a98a6;
+				padding: 0 20px;
+				}
+
+			h3 {
             position: fixed;
-            top: 45%;
-            left:60%;
-            width: 55%;
+            top: 60%;
+            right: 0;
+            left: 0;
+            margin: 0 auto;
+            width: 100%;
+            text-align: center;
             transform:translateY(-50%);
             font-family: 'Love Ya Like A Sister', cursive;
             font-size: 40px;
             color: #8a98a6;
             padding: 0 20px;
-            }
-    </style>
-</head>
-<body>
-    <h1 id="Time"></h1>
-  <h3><span id="demo"></span></h3>
-  <script>
-    function timingTime(){
-      let start = '2022-11-27 23:26:00'     //开始时间
-      let startTime = new Date(start).getTime()
-      let currentTime = new Date().getTime()
-      let difference = currentTime - startTime
-      let m =  Math.floor(difference / (1000))
-      let mm = m % 60  // 秒
-      let f = Math.floor(m / 60)
-      let ff = f % 60 // 分钟
-      let s = Math.floor(f/ 60) // 小时
-      let ss = s % 24
-      let day = Math.floor(s  / 24 ) // 天数
-      return "和欣欣在一起的<br>第" + day + "天" + ss + "时" + ff + "分" + mm +'秒'
-    }
-    setInterval(()=>{
-      document.getElementById('Time').innerHTML = timingTime()
-    },1000)
+			}
+		</style>
 
+	</head>
+	<body>
+		<h1 id="h1"></h1>
+		<h3><span id="demo"></span></h3>
+		<canvas></canvas>
 
-    var text="桃之夭夭，灼灼其华。\n之子于归，宜其室家。\n桃之夭夭，有蕡其实。\n之子于归，宜其家室。\n桃之夭夭，其叶蓁蓁。\n之子于归，宜其家人。"//预设文字
-    var delay=300                     //文字出现的时间间隔
-    var i=0                           //初始化变量i
-    function scrollit(){               //设置id为demo的对象内的文字为变量text的0开始到i间的文字加“_”
-    demo.innerText=text.slice(0,i++)+"_"         
-    if(i>text.length){            //设置i大于text的文本长度时
-        i=200                      //重设i为0，使文字重新从第一个文字出现
-        setTimeout("scrollit()",delay*10)       //延时执行scrollit()函数,delay*10是为了让显示完整文字的时间长一点  
-    }
-    //否则在delay毫秒后再次执行scrollit()函数
-    else setTimeout("scrollit()",delay)             
-    }
-    scrollit()      //调用scrollit()函数
+		<script>
+			window.onload = function starttime() {
+				time(h1, '2022-11-27 23:26:00'); // 在一起的时间
+				ptimer = setTimeout(starttime, 1000); // 添加计时器
+			}
 
-  </script>
-</body>
+			function time(obj, futimg) {
+				var nowtime = new Date().getTime(); // 现在时间转换为时间戳
+				var futruetime = new Date(futimg).getTime(); // 未来时间转换为时间戳
+				var msec = nowtime - futruetime; // 毫秒 未来时间-现在时间
+				var time = (msec / 1000); // 毫秒/1000
+				var day = parseInt(time / 86400); // 天  24*60*60*1000 
+				var hour = parseInt(time / 3600) - 24 * day; // 小时 60*60 总小时数-过去的小时数=现在的小时数 
+				var minute = parseInt(time % 3600 / 60); // 分 -(day*24) 以60秒为一整份 取余 剩下秒数 秒数/60 就是分钟数
+				var second = parseInt(time % 60); // 以60秒为一整份 取余 剩下秒数
+				obj.innerHTML = "和欣欣在一起的<br>第" + parseInt(time / 86400) + "天" + hour + "时" + minute + "分" + second + "秒"
+
+				return true;
+			}
+
+			var text = "桃之夭夭，灼灼其华。\n之子于归，宜其室家。\n桃之夭夭，有蕡其实。\n之子于归，宜其家室。\n桃之夭夭，其叶蓁蓁。\n之子于归，宜其家人。\n" //预设文字
+			var delay = 300 //文字出现的时间间隔
+			var i = 0 //初始化变量i
+			function scrollit() { //设置id为demo的对象内的文字为变量text的0开始到i间的文字加“_”
+				demo.innerText = text.slice(0, i++) + "_"
+				if (i > text.length) { //设置i大于text的文本长度时
+					i = 200 //重设i为0，使文字重新从第一个文字出现
+					setTimeout("scrollit()", delay * 10) //延时执行scrollit()函数,delay*10是为了让显示完整文字的时间长一点  
+				}
+				//否则在delay毫秒后再次执行scrollit()函数
+				else setTimeout("scrollit()", delay)
+			}
+			scrollit() //调用scrollit()函数
+		</script>
+
+	</body>
 </html>
