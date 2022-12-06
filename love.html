@@ -151,11 +151,6 @@ window.addEventListener("touchmove", onMove);
 window.addEventListener("resize", onResize);
 requestAnimationFrame(render);
 
-window.onload=function starttime(){
-        time(h1,'2017,4,31');     // 在一起的时间
-        ptimer = setTimeout(starttime,1000); // 添加计时器
-}
-
 
 			window.onload = function starttime() {
 				time(h1, '2022-11-27 23:26:00'); // 在一起的时间
@@ -181,7 +176,7 @@ window.onload=function starttime(){
 					this.opts = opts || {};
 					this.source = opts.source;
 					this.output = opts.output;
-					this.delay = opts.delay || 120;
+					this.delay = opts.delay || 300;
 					this.chain = {
 						parent: null,
 						dom: this.output,
