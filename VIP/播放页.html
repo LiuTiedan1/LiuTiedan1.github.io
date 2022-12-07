@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>视频切换</title>
+	</head>
+    <style>
+        *{
+            margin: 0;
+			padding: 0;
+        }
+		html,body{
+			width: 80%;
+			height: 100%;
+		}
+		.video{
+			display: block;
+			width: 80%;
+			height: 100%;
+
+		}
+		.zzzz{
+			margin relatibe;
+			
+			float: right;
+
+		}
+    </style>
+	<body>
+		<div>
+			<video class="video" id="video" autoplay loop controls>
+			<source id="source" src="./03.mp4">
+			</video>
+				<div class="zzzz">
+				<button id="but1">第一个</button> 
+				<button id="but2">第二个</button> 
+				<button id="but3">第三个</button> 
+				<button id="but3">第三个</button>
+				</div>
+		
+		</div>
+	</body>
+		<script type="text/javascript">
+			document.getElementById("but1").onclick = function() {
+				document.getElementById("source").src = "./03.mp4";
+				document.getElementById("video").load();
+			}
+			document.getElementById("but2").onclick = function() {
+				document.getElementById("source").src = "./04.mp4";
+				document.getElementById("video").load();
+			}
+			document.getElementById("but3").onclick = function() {
+				document.getElementById("source").src = "./05.mp4";
+				document.getElementById("video").load();
+			}
+			document.getElementById("but3").onclick = function() {
+				document.getElementById("source").src = "./05.mp4";
+				document.getElementById("video").load();
+			}
+		</script>
+	</body>
+</html>
+
