@@ -3,13 +3,45 @@
 	<head>
 		<meta charset="utf-8" />
 		<title>VIP视频破解</title>
-		<link rel="stylesheet" href="css/main.css">
-		<script type="text/javascript" src="js/main.js"></script>
+        <style>
+        #textbox{
+        display: none;
+        }
+
+        #textboxa{
+        display: none;
+        }
+
+        #main{
+        width:500px;  
+        height:200px;  
+        position:absolute;  
+        left:50%;  
+        top:50%;
+        }
+        select{
+        font-size: 20px;
+        line-height: solid;
+        }
+        input{
+        font-size: 20px;
+        }
+        button{
+            font-size: 20px;
+        }
+        p{
+            font-size: 20px;
+        }
+        option{
+            width: 100%;
+            height: 20px;
+        }
+        </style>
 	</head>
 	<body>
 		<div id="main">
 			<div>
-				<select name="list" id="dropdown" onchange="window.location=this.value;">
+				<select style="width: 100%;" name="list" id="dropdown" onchange="window.location=this.value;">
 					<option value="">友情链接</option>
 					<option value="https://www.iqiyi.com/">爱奇艺</option>
 					<option value="https://v.qq.com/">腾讯视频</option>
@@ -20,7 +52,7 @@
 					<option value="https://www.bilibili.com/">哔哩哔哩</option>
 				</select>
 				<div><p></p></div>
-				<select id="select_www" onchange="surf()">
+				<select style="width: 100%;" id="select_www" onchange="surf()">
 					<option value="1">端口一</option>
 					<option value="2">端口二</option>
 					<option value="3">端口三</option>
@@ -32,20 +64,134 @@
 					<option value="9">端口九</option>
 					<option value="10">端口十</option>
 					<option value="11">端口十一</option>
+					<option value="12">端口十二</option>
+					<option value="13">端口十三</option>
+					<option value="14">端口十四</option>
+					<option value="15">端口十五</option>
+					<option value="16">端口十六</option>
+					<option value="17">端口十七</option>
+					<option value="18">端口十八</option>
+					<option value="19">端口十九</option>
+					<option value="20">端口二十</option>
+					<option value="21">端口二十一</option>
+					<option value="22">端口二十二</option>
+					<option value="23">端口二十三</option>
+					<option value="24">端口二十四</option>
+					<option value="25">端口二十五</option>
+					<option value="26">端口二十六</option>
 				</select>
 				<div><p></p></div>
 				<input type="text" id="textbox" value="https://jx.aidouer.net/?url=">
 				<input type="text" id="textboxa">
-				<input type="text" id="textboxb" placeholder="请输入视频网址">
+				<input style="width: 100%; height: 30px;" type="text" id="textboxb" placeholder="请输入视频网址">
 				<div><p></p></div>
-				<button value="" id="button_www" onclick="jump()">开始解析播放</button>
-				<button value="" id="button_anew" onclick="jumpjump()">重新输入</button>
+				<div style="width: 488px; height: 40px; margin: 0 auto;">
+                    <button style="width: 49%; height:40px;" value="" id="button_www" onclick="jump()">开始解析播放</button>
+				    <button style="width: 49%; height:40px;" value="" id="button_anew" onclick="jumpjump()">重新输入</button>
+                </div>
 			</div>
 			<div>
-				<p>仅供学习使用，请勿商业用途。</p>
-				<p>公众号：铁蛋导航</p>
+				<p style="text-align: center;">仅供学习使用，请勿商业用途。</p>
+				<p style="text-align: center;">公众号：铁蛋导航</p>
 			</div>
 		</div>
-
 	</body>
+    <script>
+        function surf(){
+    select=document.getElementById("select_www").value;
+    switch(select){
+        case "1" :
+        document.getElementById("textbox").value="https://jx.aidouer.net/?url=";
+        break;
+        case "2" :
+        document.getElementById("textbox").value="https://jx.iztyy.com/svip/?url=";
+        break;
+        case "3" :
+        document.getElementById("textbox").value="https://jx.parwix.com:4433/player/?url=";
+        break;
+        case "4" :
+        document.getElementById("textbox").value="https://www.pangujiexi.cc/jiexi.php?url=";
+        break;
+        case "5" :
+        document.getElementById("textbox").value="https://jx.jsonplayer.com/player/?url=";
+        break;
+        case "6" :
+        document.getElementById("textbox").value="https://2.08bk.com/?url=";
+        break;
+        case "7" :
+        document.getElementById("textbox").value="https://www.administratorw.com/video.php?url=";
+        break;
+        case "8" :
+        document.getElementById("textbox").value="https://jx.ivito.cn/?url=";
+        break;
+        case "9" :
+        document.getElementById("textbox").value="https://www.ckmov.vip/api.php?url=";
+        break;
+        case "10" :
+        document.getElementById("textbox").value="https://jx.xmflv.com/?url=";
+        break;
+        case "11" :
+        document.getElementById("textbox").value="https://z1.im1907.top/?jx=";
+        break;
+        case "12" :
+        document.getElementById("textbox").value="https://vip.mpos.ren/v/?url=";
+        break;
+        case "13" :
+        document.getElementById("textbox").value="https://pangujiexi.cc/jiexi.php?url=";
+        break;
+        case "14" :
+        document.getElementById("textbox").value="https://svip.bljiex.cc/?v=";
+        break;
+        case "15" :
+        document.getElementById("textbox").value="https://okjx.cc/?url=";
+        break;
+        case "16" :
+        document.getElementById("textbox").value="https://www.nxflv.com/?url=";
+        break;
+        case "17" :
+        document.getElementById("textbox").value="https://www.h8jx.com/jiexi.php?url=";
+        break;
+        case "18" :
+        document.getElementById("textbox").value="https://www.8090g.cn/?url=";
+        break;
+        case "19" :
+        document.getElementById("textbox").value="https://z1.m1907.cn/?jx=";
+        break;
+        case "20" :
+        document.getElementById("textbox").value="https://jiexi.8old.cn/m3u8tv20210705%60/?url=";
+        break;
+        case "21" :
+        document.getElementById("textbox").value="https://jx.m3u8.tv/jiexi/?url=";
+        break;
+        case "22" :
+        document.getElementById("textbox").value="https://55o.co/?url=";
+        break;
+        case "23" :
+        document.getElementById("textbox").value="https://www.1717yun.com/jx/ty.php?url=";
+        break;
+        case "24" :
+        document.getElementById("textbox").value="https://parse.123mingren.com/?url=";
+        break;
+        case "25" :
+        document.getElementById("textbox").value="https://www.administratorw.com/index/qqvod.php?url=";
+        break;
+        case "26" :
+        document.getElementById("textbox").value="https://jx.000180.top/jx/?url=";
+        break;
+    }
+}
+
+function jump(){
+    var textbox=document.getElementById('textbox').value;
+    var textboxb=document.getElementById('textboxb').value;
+    document.getElementById('textboxa').value=textbox+textboxb;
+
+    
+    location=document.getElementById("textboxa").value;
+}
+
+function jumpjump(){
+    document.getElementById("textboxb").value="";
+}
+    </script>
 </html>
